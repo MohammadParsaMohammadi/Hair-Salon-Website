@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سالن زیبایی حرفه‌ای | گالری نمونه‌کارها</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="assets/css/public.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body dir="rtl">
+    <!-- (Include Header Here - Copied from index.html for brevity in production, represented structurally here) -->
+    <header class="site-header" id="header">
+        <div class="header-container">
+            <!-- Left: Logo -->
+            <a href="index.html" class="logo" aria-label="رفتن به صفحه اصلی">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <span>لومیر</span>
+            </a>
+
+            <!-- Center: Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">صفحه اصلی</a></li>
+                    <!-- <li><a href="services.html">خدمات</a></li> -->
+                    <li><a href="gallery.html" class="active">گالری</a></li>
+                    <li><a href="about-services.html">درباره ما</a></li>
+                    <li><a href="contact.html">تماس با ما</a></li>
+                </ul>
+            </nav>
+
+            <!-- Right: CTA & Mobile Toggle -->
+            <div class="header-actions">
+                <button class="btn btn-primary ripple-effect"
+                    onclick="window.location.href='register.html'">ورود</button>
+                <button class="hamburger-btn" id="menu-toggle" aria-label="باز کردن منو">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <span class="logo-text">لومیر</span>
+            <button class="close-drawer" id="close-drawer" aria-label="بستن منو">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="index.html">صفحه اصلی</a>
+            <!-- <a href="services.html">خدمات</a> -->
+            <a href="gallery.html" class="active">گالری</a>
+            <a href="about-services.html">درباره ما</a>
+            <a href="contact.html">تماس با ما</a>
+        </nav>
+        <div class="drawer-footer">
+            <button class="btn btn-primary w-100 ripple-effect">ورود</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="gallery-hero reveal-on-scroll">
+            <div class="container text-center">
+                <h1 class="fade-up">نمونه‌کارهای ما</h1>
+                <p class="text-muted fade-up delay-100">جدیدترین تغییرات و نمونه‌کارهای ما را مشاهده کنید<br>و هنر پشت
+                    هر سبک را کشف کنید.</p>
+            </div>
+        </section>
+
+        <!-- Category 1: Hair Coloring -->
+        <section class="portfolio-category section-spacing reveal-on-scroll">
+            <div class="container">
+                <div class="category-header">
+                    <div class="header-left">
+                        <h2>رنگ مو</h2>
+                        <p class="text-muted">جدیدترین پروژه‌های رنگ مو و هنر بالیاژ ما را مشاهده کنید.</p>
+                    </div>
+                    <!-- <div class="header-right">
+                        <button class="btn btn-outline view-all-btn">مشاهده همه <span class="arrow">&larr;</span></button>
+                    </div> -->
+                </div>
+
+                <!-- ROW 1: 8 Service Cards -->
+                <div class="slider-wrapper mb-4">
+                    <button class="slider-btn prev" aria-label="اسلاید قبلی" disabled>&rarr;</button>
+                    <div class="slider-track snap-track stagger-children">
+                        <!-- Card 1 -->
+                        <div class="portfolio-card" style="--i: 1" data-category="بالیاژ و آمبره"
+                            data-price="۲,۵۰۰,۰۰۰ تومان" data-duration="۱۸۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image19.jpg"
+                                    alt="بالیاژ تخصصی مو" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">بالیاژ و آمبره</span>
+                                <h3>بالیاژ تخصصی مو</h3>
+                                <p class="text-muted text-sm desc-clamp">تکنیک بالیاژ برزیلی و روسی با روشن‌کننده‌های
+                                    بدون آسیب و ایجاد سایه روشن‌های بسیار طبیعی.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="portfolio-card" style="--i: 2" data-category="احیای مو" data-price="۱,۸۰۰,۰۰۰ تومان"
+                            data-duration="۱۲۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image05.avif"
+                                    alt="کراتینه و صافی مو" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">احیای مو</span>
+                                <h3>کراتینه و صافی احیا</h3>
+                                <p class="text-muted text-sm desc-clamp">صافی ۱۰۰ درصد همراه با بازسازی عمیق ساختار
+                                    موهای آسیب‌دیده با مواد ارگانیک بدون گاز و بو.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="portfolio-card" style="--i: 3" data-category="کوتاهی مو" data-price="۴۰۰,۰۰۰ تومان"
+                            data-duration="۴۵ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image01.avif"
+                                    alt="کوتاهی ژورنالی" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">کوتاهی مو</span>
+                                <h3>کوتاهی ژورنالی و استایل</h3>
+                                <p class="text-muted text-sm desc-clamp">کوتاهی طبق جدیدترین متدهای روز دنیا متناسب با
+                                    فرم صورت، آناتومی چهره و حجم مو.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="portfolio-card" style="--i: 4" data-category="میکاپ" data-price="۴,۵۰۰,۰۰۰ تومان"
+                            data-duration="۲۴۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image10.avif"
+                                    alt="میکاپ تخصصی عروس" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">میکاپ</span>
+                                <h3>میکاپ تخصصی عروس</h3>
+                                <p class="text-muted text-sm desc-clamp">میکاپ مدرن و ضدآب با استفاده از برترین برندهای
+                                    لوکس جهان با ماندگاری ۲۴ ساعته.</p>
+
+
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 5 -->
+                        <div class="portfolio-card" style="--i: 5" data-category="شینیون" data-price="۸۰۰,۰۰۰ تومان"
+                            data-duration="۶۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image11.avif"
+                                    alt="شینیون و استایل" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">شینیون</span>
+                                <h3>شینیون و فرم‌دهی مو</h3>
+                                <p class="text-muted text-sm desc-clamp">طراحی و دیزاین آرایش مو بر اساس سبک‌های
+                                    اروپایی، خطی و کلاسیک مناسب تمامی جشن‌ها.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 6 -->
+                        <div class="portfolio-card" style="--i: 6" data-category="خدمات ناخن" data-price="۴۵۰,۰۰۰ تومان"
+                            data-duration="۹۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image12.avif"
+                                    alt="کاشت و ژلیش ناخن" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">خدمات ناخن</span>
+                                <h3>کاشت و دیزاین ناخن</h3>
+                                <p class="text-muted text-sm desc-clamp">کاشت ژل، لمینت، مانیکور روسی و طراحی‌های
+                                    مینیاتوری با مواد درجه یک بی‌آسیب.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 7 -->
+                        <div class="portfolio-card" style="--i: 7" data-category="مراقبت پوست"
+                            data-price="۹۰۰,۰۰۰ تومان" data-duration="۷۵ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image13.avif"
+                                    alt="فیشیال و پاکسازی پوست" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">مراقبت پوست</span>
+                                <h3>فیشیال و پاکسازی عمیق</h3>
+                                <p class="text-muted text-sm desc-clamp">لایه‌برداری، تخلیه جوش‌های سرسیاه و آبرسانی
+                                    عمیق پوست با دستگاه‌های درموفیشیال تخصصی.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 8 -->
+                        <div class="portfolio-card" style="--i: 8" data-category="خدمات مژه" data-price="۶۵۰,۰۰۰ تومان"
+                            data-duration="۹۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image01.avif"
+                                    alt="اکستنشن مژه" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">خدمات مژه</span>
+                                <h3>اکستنشن و لیفت مژه</h3>
+                                <p class="text-muted text-sm desc-clamp">اکستنشن والیوم، مگاوالیوم و لیفت و لمینت مژه با
+                                    استفاده از افکت‌های اختصاصی صورت.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn next" aria-label="اسلاید بعدی">&larr;</button>
+                </div>
+                <!-- ROW 2: 6 Service Cards -->
+                <div class="slider-wrapper mt-4">
+                    <button class="slider-btn prev" aria-label="اسلاید قبلی" disabled>&rarr;</button>
+                    <div class="slider-track snap-track stagger-children">
+                        <!-- Card 9 -->
+                        <div class="portfolio-card" style="--i: 1" data-category="خدمات ابرو" data-price="۲۵۰,۰۰۰ تومان"
+                            data-duration="۳۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image15.avif"
+                                    alt="قرینه‌سازی و لیفت ابرو" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">خدمات ابرو</span>
+                                <h3>اصلاح و لیفت ابرو</h3>
+                                <p class="text-muted text-sm desc-clamp">اصلاح تخصصی، قرینه‌سازی هندسی و لیفت ابرو با
+                                    مواد ایتالیایی غنی از بوتاکس.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 10 -->
+                        <div class="portfolio-card" style="--i: 2" data-category="تراپی مو" data-price="۱,۲۰۰,۰۰۰ تومان"
+                            data-duration="۹۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image08.webp"
+                                    alt="پروتئین تراپی مو" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">تراپی مو</span>
+                                <h3>پروتئین‌تراپی و خاویار</h3>
+                                <p class="text-muted text-sm desc-clamp">تغذیه عمیق ساقه مو، رفع کشسانی و آبرسانی فوری
+                                    موهای دهیدراته و دکلره شده.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 11 -->
+                        <div class="portfolio-card" style="--i: 3" data-category="بافت مو" data-price="۳۵۰,۰۰۰ تومان"
+                            data-duration="۶۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image07.jpg"
+                                    alt="بافت تخصصی مو" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">بافت مو</span>
+                                <h3>بافت و دیزاین تخصصی</h3>
+                                <p class="text-muted text-sm desc-clamp">انواع بافت‌های مکزیکی، کویین، هلندی و آفریقایی
+                                    با اضافه کردن موهای رنگی و دیزاین.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 12 -->
+                        <div class="portfolio-card" style="--i: 4" data-category="اسپا و پدیکور"
+                            data-price="۵۰۰,۰۰۰ تومان" data-duration="۶۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="assets/media/image17.avif"
+                                    alt="پدیکور و اسپا پا" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+
+
+                            <div class="card-info">
+                                <span class="card-tag">اسپا و پدیکور</span>
+                                <h3>پدیکور و کفی‌سابی اسپا</h3>
+                                <p class="text-muted text-sm desc-clamp">رفع ترک‌های خشن پا، ماساژ ریلکسی، نمک‌درمانی و
+                                    پارافین‌تراپی تخصصی.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 13 -->
+                        <div class="portfolio-card" style="--i: 5" data-category="آرایش دائم"
+                            data-price="۲,۸۰۰,۰۰۰ تومان" data-duration="۱۵۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="assets/media/image09.jpg"
+                                    alt="میکروبلیدینگ فیبروز" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">آرایش دائم</span>
+                                <h3>میکروبلیدینگ و فیبروز</h3>
+                                <p class="text-muted text-sm desc-clamp">طراحی خطوط ظریف و مویی ابرو با سوزن‌های نانو و
+                                    پیگمنت‌های گیاهی بدون تغییر رنگ.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 14 -->
+                        <div class="portfolio-card" style="--i: 6" data-category="رنگ مو" data-price="۱,۵۰۰,۰۰۰ تومان"
+                            data-duration="۱۲۰ دقیقه">
+                            <div class="card-img-container">
+                                <img src="./assets/media/image18.jpg"
+                                    alt="رنگ موی فانتزی" loading="lazy">
+                                <div class="card-img-overlay"></div>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-tag">رنگ مو</span>
+                                <h3>رنگ‌های فانتزی و ترکیبی</h3>
+                                <p class="text-muted text-sm desc-clamp">پیاده‌سازی تناژهای خاص فانتزی، کهکشانی و پاستلی
+                                    با تثبیت‌کننده‌های هوشمند درخشش.</p>
+                                <button class="btn-text view-details-link">
+                                    مشاهده جزئیات <span class="arrow">&larr;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-btn next" aria-label="اسلاید بعدی">&larr;</button>
+                </div>
+            </div>
+        </section>
+
+        </div>
+        </section>
+
+        <!-- Category 2: Styling & Cuts (Empty State Demo) -->
+        <section class="portfolio-category section-spacing reveal-on-scroll">
+            <div class="container">
+                <div class="category-header">
+                    <div class="header-left">
+                        <h2>کوتاهی حرفه‌ای مو</h2>
+                        <p class="text-muted">کوتاهی‌های اختصاصی و خدمات حرفه‌ای استایل مو.</p>
+                    </div>
+                </div>
+
+                <div class="empty-state text-center" style="padding: 60px 0;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--border-color)"
+                        stroke-width="1.5" style="margin-bottom: 16px;">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <h3 class="text-muted">هنوز هیچ نمونه‌کاری اضافه نشده است.</h3>
+                    <p class="text-sm text-muted">به‌زودی برای مشاهده جدیدترین نمونه‌کارهای ما دوباره سر بزنید.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error State Demo (Hidden by default, structure provided) -->
+        <!-- 
+        <div class="error-state text-center">
+            <svg stroke="var(--error-color)" ...>
+            <p>بارگذاری نمونه‌کارها با خطا مواجه شد.</p>
+            <button class="btn btn-outline">تلاش مجدد</button>
+        </div>
+        -->
+    </main>
+
+    <!-- Portfolio Details Modal -->
+    <div class="modal-overlay" id="portfolio-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="بستن پنجره">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-wrapper">
+                    <img src="" id="modal-img" alt="تصویر نمونه‌کار">
+                </div>
+                <div class="modal-info">
+                    <span class="card-tag" id="modal-tag">دسته‌بندی</span>
+                    <h2 id="modal-title">عنوان</h2>
+                    <p class="text-muted mb-4" id="modal-desc">توضیحات</p>
+
+                    <div class="modal-meta">
+                        <div class="meta-item">
+                            <span class="text-sm text-muted">خدمت</span>
+                            <strong id="modal-service">نام خدمت</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span class="text-sm text-muted">تاریخ انجام</span>
+                            <strong id="modal-date">تاریخ</strong>
+                        </div>
+                    </div>
+
+                    <button onclick="location.href='reservation.html'" class="btn btn-primary w-100 mt-4 ripple-effect"
+                        id="modal-book-btn">
+                        رزرو این خدمت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Details Modal -->
+    <div class="modal-overlay" id="service-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="service-modal-close" aria-label="بستن پنجره">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-wrapper">
+                    <img src="" id="service-modal-img" alt="تصویر خدمت">
+                </div>
+                <div class="modal-info">
+                    <span class="card-tag" id="service-modal-tag">دسته‌بندی</span>
+                    <h2 id="service-modal-title">عنوان خدمت</h2>
+                    <p class="text-muted mb-4" id="service-modal-desc">توضیحات کامل خدمت...</p>
+
+                    <div class="modal-meta">
+                        <div class="meta-item">
+                            <span class="text-sm text-muted">هزینه پایه</span>
+                            <strong id="service-modal-price">قیمت</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span class="text-sm text-muted">مدت زمان</span>
+                            <strong id="service-modal-duration">زمان</strong>
+                        </div>
+                    </div>
+
+                    <button onclick="location.href='reservation.html'" class="btn btn-primary w-100 mt-4 ripple-effect"
+                        id="service-modal-book-btn">
+                        رزرو این خدمت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- (Include Footer Here) -->
+    <!-- Scripts -->
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/gallery.js"></script>
+</body>
+
+</html>

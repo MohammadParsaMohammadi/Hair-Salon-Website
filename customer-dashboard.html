@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل کاربری مشتری | لومیر</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap"
+        rel="stylesheet"> -->
+
+        <link rel="stylesheet" href="assets/css/dashboard.css">
+        <link rel="stylesheet" href="assets/css/global.css">
+    <script src="./assets/js/dashboard.js" defer></script>
+</head>
+
+<body class="dashboard-body">
+
+    <header class="dashboard-header">
+        <div class="header-container">
+            <button class="mobile-drawer-toggle" id="drawer-toggle" aria-label="باز کردن منو">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <a href="index.html" class="logo">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <span>لومیر</span>
+            </a>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn-logout">خروج</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <div class="dashboard-container">
+                <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="user-card">
+                <div class="user-avatar">
+                    <span class="avatar-initials">JD</span>
+                </div>
+                <h3 class="user-name">John Doe</h3>
+                <span class="user-phone" dir="ltr">0912 345 6789</span>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <!-- دکمه جدید اضافه شده -->
+            <button onclick="window.location.href='reservation.html'" class="btn btn-primary w-100 mb-4 ripple-effect" id="btn-new-reservation">
+                رزرو جدید +
+            </button>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="section-profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">پروفایل</span>
+                </button>
+
+                <button class="nav-item" data-target="section-reservations">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-label">رزروها</span>
+                </button>
+
+                <button class="nav-item" data-target="section-support">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">پشتیبانی</span>
+                </button>
+            </nav>
+        </aside>
+
+
+        <main class="dashboard-content">
+
+            <section id="section-profile" class="content-section active">
+                <h1 class="section-title">پروفایل من</h1>
+
+                <div class="dashboard-card profile-info-card fade-up">
+                    <div class="profile-grid">
+                        <div class="profile-field">
+                            <span class="field-label">نام و نام خانوادگی</span>
+                            <span class="field-value">John Doe</span>
+                        </div>
+
+                        <div class="profile-field">
+                            <span class="field-label">شماره موبایل</span>
+                            <span class="field-value" dir="ltr">0912 345 6789</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-history-wrapper">
+                    <h2 class="sub-title">سوابق خدمات</h2>
+
+                    <div class="dashboard-card fade-up">
+                        <ul class="history-list">
+                            <li>
+                                <span class="service-name">رنگ مو</span>
+                                <span class="service-date">12 Jun 2026</span>
+                            </li>
+
+                            <li>
+                                <span class="service-name">اصلاح و استایل ریش</span>
+                                <span class="service-date">30 May 2026</span>
+                            </li>
+
+                            <li>
+                                <span class="service-name">کوتاهی مو</span>
+                                <span class="service-date">12 Apr 2026</span>
+                            </li>
+                        </ul>
+
+                        <div class="history-footer">
+                            <a href="#" class="view-history-link" id="go-to-reservations">مشاهده همه سوابق &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-reservations" class="content-section">
+                <h1 class="section-title">سوابق رزرو</h1>
+
+                <div class="next-reservation-card fade-up">
+                    <div class="next-badge">رزرو بعدی</div>
+
+                    <div class="next-details">
+                        <div class="next-info">
+                            <h3>رنگ مو</h3>
+                            <p>دوشنبه، ساعت 14:30</p>
+                        </div>
+
+                        <div class="next-meta">
+                            <span class="tracking-id-container">
+                                شناسه:
+                                <code id="next-tracking-code">LUM-78592</code>
+                                <button class="copy-btn" onclick="copyTrackingID('LUM-78592', this)"
+                                    aria-label="کپی شناسه">📋</button>
+                            </span>
+
+                            <span class="status-badge confirmed">تأیید شده</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="reservation-table">
+                            <thead>
+                                <tr>
+                                    <th>خدمت</th>
+                                    <th>تاریخ</th>
+                                    <th>هزینه</th>
+                                    <th>توضیحات</th>
+                                    <th>شناسه پیگیری</th>
+                                    <th>وضعیت</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>رنگ مو</td>
+                                    <td>12 Jun 2026</td>
+                                    <td>$120</td>
+                                    <td class="table-desc"
+                                        data-tooltip="ترمیم ریشه مو با رنگ موی بدون آمونیاک و باکیفیت.">
+                                        ترمیم ریشه مو...
+                                    </td>
+
+                                    <td>
+                                        <div class="id-cell">
+                                            <code>LUM-78592</code>
+                                            <button class="copy-btn"
+                                                onclick="copyTrackingID('LUM-78592', this)">📋</button>
+                                        </div>
+                                    </td>
+
+                                    <td><span class="status-badge confirmed">تأیید شده</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>اصلاح و استایل ریش</td>
+                                    <td>30 May 2026</td>
+                                    <td>$35</td>
+                                    <td class="table-desc"
+                                        data-tooltip="اصلاح با حوله گرم، ماساژ با روغن و فرم‌دهی دقیق ریش.">
+                                        اصلاح با حوله گرم...
+                                    </td>
+                                <tr>
+                                    <td>اصلاح و استایل ریش</td>
+                                    <td>30 May 2026</td>
+                                    <td>$35</td>
+                                    <td class="table-desc" data-tooltip="اصلاح با حوله گرم، ماساژ با روغن و فرم‌دهی دقیق ریش.">اصلاح با حوله گرم...</td>
+                                    <td>
+                                        <div class="id-cell">
+                                            <code>LUM-45231</code>
+                                            <button class="copy-btn" onclick="copyTrackingID('LUM-45231', this)">📋</button>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge completed">انجام شده</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>کوتاهی مو</td>
+                                    <td>12 Apr 2026</td>
+                                    <td>$65</td>
+                                    <td class="table-desc" data-tooltip="کوتاهی فید همراه با شستشو و سشوار حرفه‌ای.">کوتاهی فید کلاسیک...</td>
+                                    <td>
+                                        <div class="id-cell">
+                                            <code>LUM-21092</code>
+                                            <button class="copy-btn" onclick="copyTrackingID('LUM-21092', this)">📋</button>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge cancelled">لغو شده</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="pag-btn" disabled>&laquo;</button>
+                        <button class="pag-btn active">1</button>
+                        <button class="pag-btn">2</button>
+                        <button class="pag-btn">&raquo;</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-support" class="content-section">
+                <h1 class="section-title">پشتیبانی</h1>
+
+                <div class="support-grid">
+
+                    <div class="dashboard-card message-card fade-up">
+                        <form id="support-form">
+
+                            <div class="form-group">
+                                <label for="support-subject">موضوع (اختیاری)</label>
+                                <input type="text" id="support-subject" placeholder="موضوع پیام چیست؟">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="support-message">پیام</label>
+                                <textarea id="support-message" placeholder="پیام خود را بنویسید..." required></textarea>
+                            </div>
+
+                            <div class="upload-container">
+                                <label class="btn-outline-upload">
+                                    <input type="file" id="support-file" accept=".jpg, .jpeg, .png, .webp" style="display:none;">
+                                    <span>📎 بارگذاری تصویر</span>
+                                </label>
+
+                                <span class="file-limits">JPG, PNG, WEBP (حداکثر ۵ مگابایت)</span>
+
+                                <div class="preview-box" id="file-preview-box" style="display: none;">
+                                    <img id="image-preview" src="#" alt="پیش‌نمایش">
+                                    <button type="button" class="remove-preview-btn" id="remove-preview-btn" aria-label="حذف تصویر">&times;</button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100" id="support-submit-btn">
+                                <!-- <span class="btn-text"> -->
+                                    ارسال پیام
+
+                                <!-- </span> -->
+                                <div class="spinner" id="support-spinner" style="display: none;"></div>
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <div class="dashboard-card contact-card fade-up">
+                        <h2>اطلاعات تماس</h2>
+
+                        <div class="contact-methods">
+                            <a href="tel:09000000000" class="contact-item phone-call">
+                                <span class="contact-icon">☎</span>
+                                <span class="contact-label" dir="ltr">0900 000 0000</span>
+                            </a>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://instagram.com" target="_blank" class="social-icon instagram" aria-label="Instagram">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </a>
+
+                            <a href="https://telegram.org" target="_blank" class="social-icon telegram" aria-label="Telegram">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </a>
+                        </div>
+
+                        <div class="working-hours">
+                            <h3>ساعات کاری</h3>
+                            <p class="days">شنبه تا پنجشنبه</p>
+                            <p class="hours">9:00 - 20:00</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="toast-notification" id="toast-notif">کپی شد!</div>
+
+</body>
+</html>

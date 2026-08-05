@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما | لومیر</title>
+
+    <!-- Google Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+    <!-- Global & Public Stylesheets -->
+    <link rel="stylesheet" href="./assets/css/public.css">
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <script src="./assets/js/global.js" defer></script>
+   
+    <style>
+        /* ==========================================================================
+           Design System Tokens & Global Variables
+           ========================================================================== */
+        :root {
+            --primary-color: #7A9E7E;
+            --primary-hover: #5F8263;
+            --primary-light: rgba(122, 158, 126, 0.08);
+            --primary-subtle: #F3F7F4;
+            
+            --text-main: #1A202C;
+            --text-muted: #718096;
+            --border-color: #E2E8F0;
+            --bg-surface: #FFFFFF;
+            --bg-page: #FAFBFB;
+            
+            --error-color: #EF4444;
+            --error-light: #FEE2E2;
+            --success-color: #10B981;
+            
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.02);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-large: 0 20px 50px rgba(122, 158, 126, 0.08);
+            
+            --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 90px 40px;
+        }
+
+        /* ==========================================================================
+           Header Navigation Styles (Matched with index.html)
+           ========================================================================== */
+        .site-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            background-color: transparent;
+            transition: height 250ms ease, background-color 250ms ease, backdrop-filter 250ms ease, box-shadow 250ms ease;
+        }
+
+        .site-header.scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            height: 70px;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            height: 40px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: transform 200ms ease;
+        }
+        .logo svg { color: var(--primary-color); }
+        .logo:hover { transform: scale(1.05); color: var(--primary-color); }
+
+        /* Desktop Nav */
+        .desktop-nav ul { display: flex; gap: 24px; list-style: none; }
+        .desktop-nav a {
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 4px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: color 200ms ease;
+        }
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 200ms ease;
+        }
+        .desktop-nav a:hover, .desktop-nav a.active { color: var(--primary-color); }
+        .desktop-nav a:hover::after, .desktop-nav a.active::after { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 16px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 250ms ease;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Mobile Drawer */
+        .drawer-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0,0,0,0.4); z-index: 1001;
+            opacity: 0; pointer-events: none; transition: opacity 300ms ease;
+        }
+        .drawer-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .mobile-drawer {
+    position: fixed; 
+    top: 0; 
+    right: 0; /* Aligned to the right for RTL */
+    width: 300px; 
+    height: 100vh;
+    background-color: var(--bg-surface); 
+    z-index: 1002;
+    padding: 24px; 
+    display: flex; 
+    flex-direction: column;
+    box-shadow: var(--shadow-medium); 
+    
+    /* The Smooth Fix: Hardware-accelerated transform */
+    transform: translateX(100%); 
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-drawer.active { 
+    transform: translateX(0); 
+}
+
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--primary-color); }
+        .close-drawer { background: none; border: none; color: var(--text-main); cursor: pointer; }
+        .mobile-nav { display: flex; flex-direction: column; gap: 24px; flex-grow: 1; }
+        .mobile-nav a { font-size: 1.125rem; font-weight: 500; text-decoration: none; color: var(--text-main); }
+        .mobile-nav a.active, .mobile-nav a:hover { color: var(--primary-color); }
+        .drawer-footer { margin-top: auto; }
+        .w-100 { width: 100%; }
+
+        /* Responsive Header Adjustments */
+        @media (max-width: 991px) {
+            .site-header, .site-header.scrolled { height: 72px; }
+            .header-container { padding: 0 24px; }
+            .desktop-nav, .header-actions .btn-primary { display: none; }
+            .hamburger-btn { display: block; }
+        }
+        @media (max-width: 767px) {
+            .site-header, .site-header.scrolled { height: 64px; }
+        }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero-section {
+            height: 280px;
+            background: linear-gradient(180deg, #F4F7F4 0%, rgba(255, 255, 255, 0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 700ms var(--transition-smooth) forwards;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+            white-space: pre-line;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 700ms var(--transition-smooth) 150ms forwards;
+        }
+
+        /* ==========================================================================
+           Main Contact Card Layout Architectures
+           ========================================================================== */
+        .main-contact-card {
+            margin-top: 70px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 26px;
+            box-shadow: var(--shadow-large);
+            display: flex;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.96);
+            animation: scaleIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Form Panel */
+        .contact-form-panel {
+            width: 60%;
+            padding: 42px;
+            background: var(--bg-surface);
+        }
+
+        .panel-title {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .panel-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        /* Error Message Banner */
+        .error-banner {
+            background-color: var(--error-light);
+            border-right: 4px solid var(--error-color);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: none;
+        }
+        .error-banner-title { font-size: 14px; font-weight: 700; color: #991B1B; }
+        .error-banner-desc { font-size: 13px; color: #7F1D1D; margin-top: 2px; }
+
+        /* Form Controls Setup */
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .input-control {
+            width: 100%;
+            height: 56px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0 18px;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: var(--bg-surface);
+            outline: none;
+            transition: all var(--transition-smooth);
+        }
+
+        .input-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(122, 158, 126, 0.1);
+        }
+
+        .input-control::placeholder {
+            color: #A0AEC0;
+        }
+
+        textarea.input-control {
+            height: 180px;
+            padding: 18px;
+            resize: vertical;
+        }
+
+        .input-control:disabled {
+            background-color: #F7FAFC;
+            color: #A0AEC0;
+            cursor: not-allowed;
+        }
+
+        .textarea-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }
+
+        .char-counter {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Send Actions Button */
+        .btn-submit {
+            width: 100%;
+            height: 58px;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 28px;
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition-smooth);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-submit:disabled {
+            background-color: #CBD5E0;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Spinner Loading Component */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFFFFF;
+            animation: spin 800ms linear infinite;
+            display: none;
+        }
+
+        /* Contact Info Panel */
+        .contact-info-panel {
+            width: 40%;
+            background-color: var(--primary-subtle);
+            padding: 42px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Content info card templates */
+        .info-card {
+            background: var(--bg-surface);
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition-smooth);
+        }
+
+        .info-card:hover {
+            transform: translateX(-6px);
+        }
+
+        .info-icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform var(--transition-smooth);
+        }
+
+        .info-card:hover .info-icon-box {
+            transform: scale(1.1);
+        }
+
+        .info-icon {
+            font-size: 20px;
+            color: var(--primary-color);
+            display: flex;
+        }
+
+        .info-details-box {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .info-card-value {
+            font-size: 14px;
+            color: var(--text-muted);
+            white-space: pre-line;
+        }
+
+        /* Social Channels Grid Layout */
+        .social-container {
+            margin-top: auto;
+        }
+
+        .social-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 14px;
+        }
+
+        .social-icons-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-circle-link {
+            width: 54px;
+            height: 54px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            position: relative;
+            transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.25);
+        }
+
+        .social-circle-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            transition: fill var(--transition-smooth);
+        }
+
+        /* Dynamic Tooltips configuration rules */
+        .social-circle-link::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background-color: #1A202C;
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition-smooth);
+        }
+
+        .social-circle-link:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Brand Color Transitions */
+        .social-circle-link:hover {
+            transform: translateY(-5px) scale(1.15);
+            box-shadow: var(--shadow-medium);
+            border-color: transparent;
+        }
+
+        .social-circle-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #FFFFFF;
+        }
+
+        .social-circle-link.telegram:hover {
+            background-color: #0088cc;
+            color: #FFFFFF;
+        }
+
+        .social-circle-link.whatsapp:hover {
+            background-color: #25D366;
+            color: #FFFFFF;
+        }
+
+        /* ==========================================================================
+           FAQ Accordion Preview Section
+           ========================================================================== */
+        .faq-preview-section {
+            margin-top: 90px;
+        }
+
+        .faq-main-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -0.5px;
+            margin-bottom: 40px;
+        }
+
+        .accordion-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .accordion-item:hover {
+            background-color: #F8FAFC;
+        }
+
+        .accordion-header-btn {
+            width: 100%;
+            padding: 24px;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .accordion-icon {
+            font-size: 18px;
+            color: var(--text-muted);
+            transition: transform var(--transition-smooth);
+        }
+
+        .accordion-collapse-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-body-content {
+            padding: 0 24px 24px 24px;
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Active State Adjustments */
+        .accordion-item.open .accordion-icon {
+            transform: rotate(45deg);
+            color: var(--primary-color);
+        }
+
+        /* Empty State Fallback CSS rule */
+        .empty-state-notice {
+            padding: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 15px;
+            background: #F8FAFC;
+            border-radius: 18px;
+            border: 1px dashed var(--border-color);
+        }
+
+        /* ==========================================================================
+           Global UI Toast Notifications Engine
+           ========================================================================== */
+        .toast-container {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 9999;
+        }
+
+        .toast-card {
+            background: #1A202C;
+            color: #FFFFFF;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: toastIn 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* ==========================================================================
+           Animations Framework Engine
+           ========================================================================== */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes toastIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .control-invalid {
+            border-color: var(--error-color) !important;
+            animation: shake 400ms ease-in-out;
+        }
+
+        /* ==========================================================================
+           Responsive Adaptability Architecture
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .main-wrapper { padding: 0 32px 70px 32px; }
+            .main-contact-card { grid-template-columns: 1fr 1fr; }
+            .contact-form-panel { width: 50%; padding: 36px; }
+            .contact-info-panel { width: 50%; padding: 36px; }
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper { padding: 0 20px 50px 20px; }
+            .hero-title { font-size: 36px; }
+            .main-contact-card { flex-direction: column; }
+            .contact-form-panel { width: 100%; order: 1; padding: 32px 24px; }
+            .contact-info-panel { width: 100%; order: 2; padding: 32px 24px; gap: 24px; }
+            .social-container { margin-top: 20px; }
+            .faq-main-title { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ================= HEADER (Matched with index.html) ================= -->
+    <header class="site-header" id="header">
+        <div class="header-container">
+
+            <!-- Right: Logo -->
+            <a href="index.html" class="logo" aria-label="صفحه اصلی لومیر">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <span>لومیر</span>
+            </a>
+
+            <!-- Center: Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="gallery.html">گالری</a></li>
+                    <li><a href="about-services.html">درباره ما</a></li>
+                    <li><a href="contact.html" class="active">تماس با ما</a></li>
+                </ul>
+            </nav>
+
+            <!-- Left: CTA & Mobile Toggle -->
+            <div class="header-actions">
+                <button class="btn btn-primary ripple-effect"
+                    onclick="window.location.href='register.html'">ورود / ثبت‌نام</button>
+
+                <button class="hamburger-btn" id="menu-toggle" aria-label="باز کردن منو">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <div class="mobile-drawer" id="mobile-drawer">
+
+        <div class="drawer-header">
+            <span class="logo-text">لومیر</span>
+
+            <button class="close-drawer" id="close-drawer" aria-label="بستن منو">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="mobile-nav">
+            <a href="index.html">خانه</a>
+            <a href="gallery.html">گالری</a>
+            <a href="about-services.html">درباره ما</a>
+            <a href="contact.html" class="active">تماس با ما</a>
+        </nav>
+
+        <div class="drawer-footer">
+            <button class="btn btn-primary w-100 ripple-effect" onclick="window.location.href='register.html'">ورود / ثبت‌نام</button>
+        </div>
+
+    </div>
+
+    <div class="main-wrapper">
+
+        <section class="hero-section">
+            <h1 class="hero-title">تماس با ما</h1>
+            <p class="hero-desc">ما اینجا هستیم تا به تمام سوالات شما پاسخ دهیم.
+همیشه می‌توانید با ما در ارتباط باشید.</p>
+        </section>
+
+        <main class="main-contact-card" id="contact-card-root">
+            
+            <section class="contact-form-panel">
+                <h2 class="panel-title">ارسال پیام به ما</h2>
+                <p class="panel-desc">فرم زیر را تکمیل کنید؛ تیم ما در سریع‌ترین زمان ممکن با شما تماس خواهد گرفت.</p>
+
+                <div class="error-banner" id="form-error-banner">
+                    <div class="error-banner-title">امکان ارسال پیام شما وجود ندارد.</div>
+                    <div class="error-banner-desc">لطفاً بعداً دوباره تلاش کنید.</div>
+                </div>
+
+                <form id="contact-form-element" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="contact-name">نام و نام خانوادگی</label>
+                        <input type="text" id="contact-name" class="input-control" placeholder="علی محمدی" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contact-phone">شماره تماس</label>
+                        <input type="text" inputmode="numeric" id="contact-phone" class="input-control" placeholder="۰۹۱۲XXX۰۹۱۲" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contact-message">متن پیام شما</label>
+                        <textarea id="contact-message" class="input-control" placeholder="پیام خود را اینجا بنویسید..." maxlength="1500" required></textarea>
+                        <div class="textarea-footer">
+                            <span class="char-counter" id="message-char-counter">0 / 1500</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submit-btn-element" disabled>
+                        <span class="spinner" id="btn-loading-spinner"></span>
+                        <span id="btn-text-content">ارسال پیام</span>
+                    </button>
+                </form>
+            </section>
+
+            <section class="contact-info-panel" id="info-panel-container">
+                <div>
+                    <h2 class="panel-title" style="font-size: 30px;">اطلاعات تماس</h2>
+                    <p class="panel-desc" style="margin-bottom: 0;">خوشحال می‌شویم شما را حضوری ملاقات کنیم.</p>
+                </div>
+
+                <div id="info-cards-collection" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="info-card">
+                        <div class="info-icon-box">
+                            <span class="info-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </span>
+                        </div>
+                        <div class="info-details-box">
+                            <h3 class="info-card-title">شماره تماس</h3>
+                            <p class="info-card-value">021 0000 0000</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon-box">
+                            <span class="info-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </span>
+                        </div>
+                        <div class="info-details-box">
+                            <h3 class="info-card-title">آدرس</h3>
+                            <p class="info-card-value">تهران، خیابان ولیعصر، سوئیت ۱۲۳</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon-box">
+                            <span class="info-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </span>
+                        </div>
+                        <div class="info-details-box">
+                            <h3 class="info-card-title">ساعات کاری</h3>
+                            <p class="info-card-value"><strong>شنبه تا پنج‌شنبه:</strong>\n09:00 - 20:00\n\n<strong>جمعه:</strong>\n10:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-container">
+                    <h3 class="social-title">شبکه‌های اجتماعی</h3>
+                    <div class="social-icons-row">
+                        <a href="#" class="social-circle-link instagram" data-tooltip="اینستاگرام" aria-label="صفحه اینستاگرام ما">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="social-circle-link telegram" data-tooltip="تلگرام" aria-label="کانال تلگرام ما">
+                            <svg viewBox="0 0 24 24"><path d="M12 .587c-6.305 0-11.413 5.108-11.413 11.413 0 6.305 5.108 11.412 11.412 11.412 6.305 0 11.412-5.107 11.412-11.412 0-6.305-5.107-11.413-11.413-11.413zm5.454 7.604l-1.895 8.932c-.143.643-.524.801-1.063.5l-2.887-2.128-1.393 1.34c-.154.154-.284.284-.582.284l.207-2.937 5.347-4.832c.232-.207-.051-.322-.361-.116l-6.608 4.161-2.846-.891c-.619-.193-.632-.619.129-.916l11.115-4.284c.515-.187.966.122.744.947z"/></svg>
+                        </a>
+                        <a href="#" class="social-circle-link whatsapp" data-tooltip="واتساپ" aria-label="ارتباط با ما در واتساپ">
+                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.742.002-2.602-1.005-5.05-2.837-6.884-1.832-1.833-4.264-2.842-6.872-2.843-5.443 0-9.87 4.372-9.874 9.745-.002 1.704.444 3.371 1.292 4.845L1.87 21.08l4.777-1.926zM17.53 14.4c-.3-.149-1.772-.874-2.046-.973-.274-.1-.474-.149-.674.149-.2.3-.773.974-.948 1.173-.175.2-.35.225-.65.075-.3-.15-1.266-.466-2.41-1.486-.89-.794-1.49-1.775-1.665-2.074-.175-.3-.019-.462.13-.611.135-.134.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.674-1.624-.924-2.224-.244-.588-.491-.508-.674-.517-.175-.008-.375-.01-.575-.01-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.115 3.23 5.123 4.53.715.31 1.273.495 1.708.633.718.228 1.37.195 1.887.118.577-.087 1.772-.724 2.022-1.399.25-.675.25-1.253.175-1.399-.075-.145-.275-.245-.575-.395z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="faq-preview-section">
+            <h2 class="faq-main-title">پرسش‌های متداول</h2>
+            
+            <div class="accordion-wrapper">
+                <div class="accordion-item">
+                    <button class="accordion-header-btn">
+                        <span>چگونه می‌توانم زمان نوبت خود را تغییر دهم یا آن را لغو کنم؟</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-collapse-panel">
+                        <div class="accordion-body-content">
+                            شما می‌توانید تا ۲۴ ساعت قبل از زمان تعیین‌شده، با ورود به پنل کاربری خود یا تماس مستقیم با پذیرش مجموعه، نوبت خود را به راحتی تغییر داده یا لغو کنید.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header-btn">
+                        <span>آیا پذیرش حضوری بدون نوبت قبلی انجام می‌شود؟</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-collapse-panel">
+                        <div class="accordion-body-content">
+                            اگرچه اکیداً پیشنهاد می‌کنیم جهت رزرو متخصص و زمان دلخواه خود از قبل نوبت بگیرید، اما بر اساس ظرفیت و کنسلی‌های روزانه، پذیرش حضوری نیز انجام خواهد شد.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header-btn">
+                        <span>از چه برندهای تخصصی برای مراقبت از مو استفاده می‌کنید؟</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-collapse-panel">
+                        <div class="accordion-body-content">
+                            ما منحصراً از برندهای ارگانیک و باکیفیت مراقبت و ترمیم مو مانند Olaplex، Oribe و Kérastase استفاده می‌کنیم تا سلامت و زیبایی موهای شما کاملاً تضمین شود.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div style="text-align: center; padding: 40px; background: var(--bg-surface); border-top: 1px solid var(--border-color); font-size: 13px; color: var(--text-muted);">
+        &copy; ۲۰۲۶ سالن زیبایی لومیر. تمامی حقوق محفوظ است.
+    </div>
+    <!-- Scripts -->
+    <script src="assets/js/global.js"></script>
+    <script>
+        // Header Scroll & Mobile Drawer Navigation Controller
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeDrawer = document.getElementById('close-drawer');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+
+        if (menuToggle && mobileDrawer && drawerOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileDrawer.classList.add('active');
+                drawerOverlay.classList.add('active');
+            });
+        }
+
+        if (closeDrawer && mobileDrawer && drawerOverlay) {
+            closeDrawer.addEventListener('click', () => {
+                mobileDrawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
+            });
+        }
+
+        if (drawerOverlay && mobileDrawer) {
+            drawerOverlay.addEventListener('click', () => {
+                mobileDrawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20 && header) {
+                header.classList.add('scrolled');
+            } else if (header) {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Global Mock States Setup 
+        const MOCK_SYSTEM_CONFIG = {
+            contactInfoAvailable: true, // Flip to false to test complete empty status state toggle
+            simulateServerError: false  // Toggle to simulate system submission crashes
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for explicit empty state handling rule
+            evaluateSystemAvailability();
+
+            // Form element selections
+            const form = document.getElementById('contact-form-element');
+            const nameInput = document.getElementById('contact-name');
+            const phoneInput = document.getElementById('contact-phone');
+            const msgInput = document.getElementById('contact-message');
+            const submitBtn = document.getElementById('submit-btn-element');
+            const charCounter = document.getElementById('message-char-counter');
+            const errorBanner = document.getElementById('form-error-banner');
+
+            // 1. Textarea Character Count Updates
+            msgInput.addEventListener('input', () => {
+                const count = msgInput.value.length;
+                charCounter.textContent = `${count} / 1500`;
+                validateFormFieldsState();
+            });
+
+            // 2. Real-Time Validations state syncs
+            [nameInput, phoneInput, msgInput].forEach(input => {
+                input.addEventListener('input', () => {
+                    if (input.classList.contains('control-invalid')) {
+                        input.classList.remove('control-invalid');
+                    }
+                    validateFormFieldsState();
+                });
+            });
+
+            // Mobile number input string filtration logic
+            phoneInput.addEventListener('keypress', (e) => {
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            function validateFormFieldsState() {
+                const isNameValid = nameInput.value.trim().length > 0;
+                const isPhoneFilled = phoneInput.value.trim().length > 0;
+                const isMessageValid = msgInput.value.trim().length > 0 && msgInput.value.length <= 1500;
+
+                // Simple state validation check to enable send button
+                submitBtn.disabled = !(isNameValid && isPhoneFilled && isMessageValid);
+            }
+
+            // 3. Dynamic Phone Number Regular Expression Validation rules
+            function verifyMobileFormat(numberString) {
+                // Evaluates standard Iranian mobile carrier structures (e.g., 09121112222 or 09XXXXXXXXX)
+                const regexPattern = /^09\d{9}$/;
+                return regexPattern.test(numberString.trim().replace(/\s+/g, ''));
+            }
+
+            // 4. Submit Event Pipeline Hook
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                errorBanner.style.display = 'none';
+
+                // Explicit validation verification on submit trigger
+                if (!verifyMobileFormat(phoneInput.value)) {
+                    phoneInput.classList.add('control-invalid');
+                    showToastNotification('⚠️ فرمت شماره موبایل وارد شده معتبر نیست.');
+                    return;
+                }
+
+                // Lock inputs, enter operational loading status
+                toggleFormElementsInteraction(true);
+
+                if (MOCK_SYSTEM_CONFIG.simulateServerError) {
+                    setTimeout(() => {
+                        toggleFormElementsInteraction(false);
+                        errorBanner.style.display = 'block';
+                        showToastNotification('❌ ارسال فرم با خطا مواجه شد.');
+                    }, 1400);
+                } else {
+                    // Simulating successful network transmission
+                    setTimeout(() => {
+                        showToastNotification('✅ پیام شما با موفقیت ارسال شد.');
+                        form.reset();
+                        charCounter.textContent = '0 / 1500';
+                        toggleFormElementsInteraction(false);
+                        submitBtn.disabled = true;
+                    }, 2000);
+                }
+            });
+
+            function toggleFormElementsInteraction(loadingStateActive) {
+                const spinner = document.getElementById('btn-loading-spinner');
+                const btnText = document.getElementById('btn-text-content');
+
+                nameInput.disabled = loadingStateActive;
+                phoneInput.disabled = loadingStateActive;
+                msgInput.disabled = loadingStateActive;
+                submitBtn.disabled = loadingStateActive;
+
+                if (loadingStateActive) {
+                    spinner.style.display = 'inline-block';
+                    btnText.textContent = 'در حال ارسال...';
+                } else {
+                    spinner.style.display = 'none';
+                    btnText.textContent = 'ارسال پیام';
+                }
+            }
+
+            // 5. Accordion Dynamic Drawer Configurations
+            const accordionHeaders = document.querySelectorAll('.accordion-header-btn');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const parentItem = header.parentElement;
+                    const collapsePanel = header.nextElementSibling;
+                    const isOpen = parentItem.classList.contains('open');
+
+                    // Collapse all open rows to match premium accordion behaviors
+                    document.querySelectorAll('.accordion-item').forEach(item => {
+                        item.classList.remove('open');
+                        item.querySelector('.accordion-collapse-panel').style.maxHeight = null;
+                    });
+
+                    if (!isOpen) {
+                        parentItem.classList.add('open');
+                        collapsePanel.style.maxHeight = collapsePanel.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+
+        // Toast message rendering mechanics
+        function showToastNotification(messageText) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast-card';
+            toast.textContent = messageText;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Empty State management execution rules mapping
+        function evaluateSystemAvailability() {
+            if (!MOCK_SYSTEM_CONFIG.contactInfoAvailable) {
+                const infoPanel = document.getElementById('info-cards-collection');
+                if (infoPanel) {
+                    infoPanel.innerHTML = `
+                        <div class="empty-state-notice">
+                            اطلاعات تماس در حال حاضر در دسترس نیست.
+                        </div>
+                    `;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

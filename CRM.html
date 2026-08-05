@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد مدیریت CRM | لومیر</title>
+    <!-- Premium Google Fonts -->
+    
+
+    <link rel="stylesheet" href="assets/css/crm.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <script src="./assets/js/crm.js" defer></script>
+</head>
+
+<body class="crm-body" dir="rtl">
+
+    <!-- Global Top-Right Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Header -->
+    <header class="crm-header">
+        <div class="header-container">
+            <div class="header-right-side">
+                <button class="mobile-menu-toggle" id="crm-sidebar-toggle" aria-label="باز و بسته کردن منو">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <a href="#" class="logo">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                    </svg>
+                    <span>لومیر CRM</span>
+                </a>
+            </div>
+
+            <!-- Global Instant Search -->
+            <div class="global-search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="global-instant-search" placeholder="جستجو در کل سیستم...">
+            </div>
+
+            <div class="header-left-side">
+                <a href="index.html" class="btn-logout-crm">خروج</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Drawer Overlay for Mobile view -->
+    <div class="drawer-overlay" id="crm-overlay"></div>
+
+    <!-- Dashboard Container Grid -->
+    <div class="crm-container">
+
+        <!-- Sidebar (Sticky Right Aligned) -->
+        <aside class="crm-sidebar" id="crm-sidebar">
+            <div class="admin-profile-card">
+                <div class="admin-avatar">
+                    <span class="avatar-initials">AD</span>
+                </div>
+                <h3 class="admin-name">Sarah Rad</h3>
+                <span class="admin-role">مدیر سیستم</span>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Menu Items -->
+            <nav class="crm-nav">
+                <button class="nav-item active" data-target="sec-dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">داشبورد</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-users">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">همه کاربران</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-reservations">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-label">رزروها</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-requests">
+                    <span class="nav-icon">⏳</span>
+                    <span class="nav-label">درخواست‌های رزرو</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-statistics">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-label">آمار</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-portfolio">
+                    <span class="nav-icon">🖼</span>
+                    <span class="nav-label">نمونه‌کارها</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-services">
+                    <span class="nav-icon">✂</span>
+                    <span class="nav-label">خدمات</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-comments">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">نظرات</span>
+                </button>
+
+                <button class="nav-item" data-target="sec-slots">
+                    <span class="nav-icon">🗓</span>
+                    <span class="nav-label">بازه‌های زمانی</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area (Left Aligned) -->
+        <main class="crm-content">
+
+            <!-- SECTION 1: DASHBOARD OVERVIEW -->
+            <section id="sec-dashboard" class="crm-section active">
+                <div class="section-header">
+                    <h1 class="section-title">خوش آمدید، Sarah</h1>
+                    <p class="section-subtitle">نمایی سریع از وضعیت کاری و برنامه امروز سالن.</p>
+                </div>
+
+                <div class="crm-card fade-up">
+                    <div class="overview-welcome-grid">
+                        <div class="welcome-box">
+                            <h3>برنامه روزانه و کنترل‌ها</h3>
+                            <p style="margin: 15px;">
+                                از منوی سمت راست برای مدیریت رزرو مشتریان، بروزرسانی نمونه‌کارها،
+                                تنظیم ساعات کاری و بررسی تعرفه خدمات استفاده کنید.
+                            </p>
+
+                            <div class="quick-links mt-20">
+                                <button class="btn btn-primary" onclick="triggerPageSwitch('sec-requests')">
+                                    بررسی درخواست‌های در انتظار
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ALL USERS -->
+            <section id="sec-users" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">همه کاربران</h1>
+
+                    <div class="table-actions">
+                        <div class="search-input-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" id="user-search-input" class="table-search"
+                                placeholder="جستجوی مشتری...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('users-table', 0)">
+                                        نام و نام خانوادگی
+                                        <span class="sort-icon">⇅</span>
+                                    </th>
+                                    <th>شماره تماس</th>
+                                    <th>سوابق رزرو</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="users-table-body">
+                                <!-- Skeleton rows loaded via JS dynamically, fallback inside -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination (10 elements per page) -->
+                    <div class="pagination-container" id="users-pagination"></div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: RESERVATIONS -->
+            <section id="sec-reservations" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">Reservations</h1>
+                    <div class="table-actions">
+                        <div class="search-input-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" id="reservation-search-input" class="table-search"
+                                placeholder="Search reservation files...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table" id="reservations-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 0)">Name <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>Phone</th>
+                                    <th>Service</th>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 3)">Date <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 4)">Price <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>Tracking ID</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservations-table-body">
+                                <!-- Dynamic dynamic rows injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container" id="reservations-pagination"></div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: RESERVATIONS -->
+            <section id="sec-reservations" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">رزروها</h1>
+                    <div class="table-actions">
+                        <div class="search-input-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" id="reservation-search-input" class="table-search"
+                                placeholder="جستجوی پرونده‌های رزرو...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table" id="reservations-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 0)">نام <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>شماره تماس</th>
+                                    <th>خدمت</th>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 3)">تاریخ <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th class="sortable" onclick="sortTable('reservations-table', 4)">قیمت <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>کد رهگیری</th>
+                                    <th>توضیحات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservations-table-body">
+                                <!-- Dynamic rows injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container" id="reservations-pagination"></div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: RESERVATION REQUESTS -->
+            <section id="sec-requests" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">درخواست‌های رزرو</h1>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>شماره تماس</th>
+                                    <th>تاریخ</th>
+                                    <th>قیمت</th>
+                                    <th>توضیحات</th>
+                                    <th>کد رهگیری</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requests-table-body">
+                                <!-- Dynamic Requests injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: STATISTICS -->
+            <section id="sec-statistics" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">آمار و عملکرد</h1>
+                    <p class="section-subtitle">نمای کلی وضعیت مالی و شاخص‌های عملکرد.</p>
+                </div>
+
+                <!-- Statistics Cards Grid -->
+                <div class="stats-grid mt-20">
+                    <div class="stat-card fade-up">
+                        <span class="stat-label">درآمد روزانه</span>
+                        <div class="stat-value" dir="ltr">$350</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 50ms;">
+                        <span class="stat-label">درآمد ماهانه</span>
+                        <div class="stat-value" dir="ltr">$8,400</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 100ms;">
+                        <span class="stat-label">درآمد سالانه</span>
+                        <div class="stat-value text-primary" dir="ltr">$92,000</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 150ms;">
+                        <span class="stat-label">رزروهای ماهانه</span>
+                        <div class="stat-value">215</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 200ms;">
+                        <span class="stat-label">تعداد کل مشتریان</span>
+                        <div class="stat-value">1,048</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 250ms;">
+                        <span class="stat-label">محبوب‌ترین خدمت</span>
+                        <div class="stat-value" style="font-size: 24px;">رنگ مو</div>
+                    </div>
+
+                    <div class="stat-card fade-up" style="animation-delay: 300ms;">
+                        <span class="stat-label">رزروهای لغوشده</span>
+                        <div class="stat-value text-danger">12</div>
+                    </div>
+                </div>
+
+                <!-- Full History Table for Stats -->
+                <div class="section-header" style="margin-top: 40px;">
+                    <h2 class="section-title" style="font-size: 22px;">سوابق کامل</h2>
+
+                    <div class="table-actions">
+                        <input type="date" id="stat-date-filter" class="table-search" style="width: 160px;">
+
+                        <div class="search-input-wrapper">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" id="stat-search-input" class="table-search"
+                                placeholder="جستجوی سوابق...">
+                        </div>
+
+                        <button class="btn btn-primary" onclick="exportToExcel()">📊 خروجی اکسل</button>
+                    </div>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table" id="stats-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('stats-table', 0)">نام <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>شماره تماس</th>
+                                    <th>خدمت</th>
+                                    <th class="sortable" onclick="sortTable('stats-table', 3)">تاریخ <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th class="sortable" onclick="sortTable('stats-table', 4)">قیمت <span
+                                            class="sort-icon">⇅</span></th>
+                                    <th>کد رهگیری</th>
+                                    <th>توضیحات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="stats-table-body">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-container" id="stats-pagination"></div>
+                </div>
+            </section>
+            <!-- SECTION 6: PORTFOLIO MANAGEMENT -->
+            <section id="sec-portfolio" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">مدیریت نمونه‌کارها</h1>
+                    <button class="btn btn-primary" onclick="openPortfolioFormModal()">+ افزودن نمونه‌کار جدید</button>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>تصویر</th>
+                                    <th>عنوان</th>
+                                    <th>برچسب / دسته‌بندی</th>
+                                    <th style="width: 150px;">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolio-table-body">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: SERVICES MANAGEMENT -->
+            <section id="sec-services" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">مدیریت خدمات</h1>
+                    <button class="btn btn-primary" onclick="openServiceFormModal()">+ افزودن خدمت</button>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th>عنوان خدمت</th>
+                                    <th class="sortable" onclick="sortTable('sec-services table', 1)">
+                                        قیمت پایه
+                                        <span class="sort-icon">⇅</span>
+                                    </th>
+                                    <th style="width: 150px;">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="services-table-body">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8: COMMENTS MANAGEMENT -->
+            <section id="sec-comments" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">مدیریت نظرات</h1>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>شماره تماس</th>
+                                    <th style="min-width: 300px;">نظر</th>
+                                    <th>وضعیت</th>
+                                    <th style="width: 200px;">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comments-table-body">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9: RESERVATION TIME SLOTS -->
+            <section id="sec-slots" class="crm-section">
+                <div class="section-header">
+                    <h1 class="section-title">بازه‌های زمانی رزرو</h1>
+                    <button class="btn btn-primary" onclick="openSlotFormModal()">+ افزودن بازه زمانی</button>
+                </div>
+
+                <div class="crm-card table-card fade-up">
+                    <div class="table-responsive">
+                        <table class="crm-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" onclick="sortTable('sec-slots table', 0)">
+                                        تاریخ
+                                        <span class="sort-icon">⇅</span>
+                                    </th>
+                                    <th>ساعت</th>
+                                    <th>وضعیت</th>
+                                    <th style="width: 150px;">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slots-table-body">
+                                <!-- Data injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shared Delete Confirmation Modal -->
+            <div class="modal-overlay" id="delete-confirm-modal">
+                <div class="modal-content" style="max-width: 400px; text-align: center;">
+                    <div class="modal-icon warning-icon">⚠️</div>
+                    <h2 class="modal-title">آیا مطمئن هستید؟</h2>
+                    <p class="modal-description">
+                        این عملیات قابل بازگشت نیست. آیا از حذف این مورد اطمینان دارید؟
+                    </p>
+
+                    <div class="modal-actions justify-center mt-24">
+                        <button class="btn btn-secondary" onclick="closeModal('delete-confirm-modal')">انصراف</button>
+                        <button class="btn btn-danger" id="confirm-delete-btn">بله، حذف شود</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Form Modal -->
+            <div class="modal-overlay" id="portfolio-form-modal">
+                <div class="modal-content large-modal">
+                    <button class="close-modal-btn" onclick="closeModal('portfolio-form-modal')">&times;</button>
+
+                    <h2 class="modal-title" id="portfolio-modal-title">افزودن نمونه‌کار جدید</h2>
+
+                    <form id="portfolio-form" class="mt-20">
+                        <div class="upload-area" id="portfolio-upload-area">
+                            <div class="upload-content">
+                                <span style="font-size: 32px;">📥</span>
+                                <p>تصویر را اینجا رها کنید یا <strong>انتخاب فایل</strong></p>
+                            </div>
+
+                            <input type="file" id="portfolio-file" accept="image/*" hidden>
+
+                            <img id="portfolio-image-preview" class="image-preview" style="display: none;"
+                                alt="پیش‌نمایش">
+                        </div>
+
+                        <div class="form-grid mt-20">
+                            <div class="form-group">
+                                <label class="form-label">عنوان</label>
+                                <input type="text" id="portfolio-title" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">دسته‌بندی</label>
+
+                                <select id="portfolio-category" class="form-input">
+                                    <option value="Hair Styling">استایل مو</option>
+                                    <option value="Hair Coloring">رنگ مو</option>
+                                    <option value="Makeup">آرایش</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-16">
+                            <label class="form-label">برچسب‌ها (با کاما جدا کنید)</label>
+                            <input type="text" id="portfolio-tags" class="form-input"
+                                placeholder="مثال: عروس، بلوند، مدرن">
+                        </div>
+
+                        <div class="form-group mt-16">
+                            <label class="form-label">توضیحات</label>
+                            <textarea id="portfolio-desc" class="form-textarea" style="height: 100px;"></textarea>
+                        </div>
+
+                        <div class="modal-actions mt-24">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="closeModal('portfolio-form-modal')">
+                                انصراف
+                            </button>
+
+                            <button type="submit" class="btn btn-primary">
+                                ذخیره نمونه‌کار
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Service Form Modal -->
+            <div class="modal-overlay" id="service-form-modal">
+                <div class="modal-content">
+                    <button class="close-modal-btn" onclick="closeModal('service-form-modal')">&times;</button>
+
+                    <h2 class="modal-title" id="service-modal-title">افزودن خدمت</h2>
+
+                    <form id="service-form" class="mt-20">
+                        <div class="form-group">
+                            <label class="form-label">عنوان خدمت</label>
+                            <input type="text" id="service-title" class="form-input" required>
+                        </div>
+
+                        <div class="form-group mt-16">
+                            <label class="form-label">قیمت ($)</label>
+                            <input type="number" id="service-price" class="form-input" min="0" required>
+                        </div>
+
+                        <div class="modal-actions mt-24">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('service-form-modal')">
+                                انصراف
+                            </button>
+
+                            <button type="submit" class="btn btn-primary">
+                                ذخیره خدمت
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Time Slot Form Modal -->
+            <div class="modal-overlay" id="slot-form-modal">
+                <div class="modal-content">
+                    <button class="close-modal-btn" onclick="closeModal('slot-form-modal')">&times;</button>
+
+                    <h2 class="modal-title" id="slot-modal-title">افزودن بازه زمانی</h2>
+
+                    <form id="slot-form" class="mt-20">
+                        <div class="form-group">
+                            <label class="form-label">تاریخ</label>
+                            <input type="date" id="slot-date" class="form-input" required>
+                        </div>
+
+                        <div class="form-group mt-16">
+                            <label class="form-label">ساعت</label>
+                            <input type="time" id="slot-time" class="form-input" required>
+                        </div>
+
+                        <div class="modal-actions mt-24">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('slot-form-modal')">
+                                انصراف
+                            </button>
+
+                            <button type="submit" class="btn btn-primary">
+                                ذخیره بازه زمانی
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- ==============================================
+         MODALS & DIALOGS
+         ============================================== -->
+
+
+    <!-- User History Dialog -->
+    <div class="modal-overlay" id="user-history-modal">
+        <div class="modal-content large-modal">
+
+            <button class="close-modal-btn" onclick="closeModal('user-history-modal')">&times;</button>
+
+            <h2 class="modal-title" id="history-modal-user-name">
+                سوابق رزرو کاربر
+            </h2>
+
+            <div class="table-responsive mt-20">
+                <table class="crm-table compact">
+                    <thead>
+                        <tr>
+                            <th>خدمت</th>
+                            <th>تاریخ</th>
+                            <th>قیمت</th>
+                            <th>کد رهگیری</th>
+                            <th>وضعیت</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="modal-history-tbody">
+                        <!-- Populated by user interaction -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Reject Request Dialog -->
+    <div class="modal-overlay" id="reject-reason-modal">
+        <div class="modal-content">
+
+            <button class="close-modal-btn" onclick="closeModal('reject-reason-modal')">&times;</button>
+
+            <h2 class="modal-title">
+                رد کردن رزرو
+            </h2>
+
+            <p class="modal-description">
+                لطفاً دلیل رد کردن این رزرو را وارد کنید. مشتری از این موضوع مطلع خواهد شد.
+            </p>
+
+
+            <div class="form-group mt-20">
+                <textarea id="reject-reason-text" class="form-textarea" placeholder="دلیل را بنویسید..."></textarea>
+            </div>
+
+
+            <div class="modal-actions mt-24">
+                <button class="btn btn-secondary" onclick="closeModal('reject-reason-modal')">
+                    انصراف
+                </button>
+
+                <button class="btn btn-danger" id="confirm-reject-btn">
+                    رد کردن رزرو
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

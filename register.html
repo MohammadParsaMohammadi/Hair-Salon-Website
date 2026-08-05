@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام | لومیر</title>
+    
+    <link rel="stylesheet" href="assets/css/auth.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+</head>
+<body class="auth-page" dir="rtl">
+    
+    <!-- Header -->
+    <header class="auth-header">
+        <div class="container-fluid">
+            <!-- <a href="index.html" class="logo">لومیر</a> -->
+            <a href="index.html" class="nav-text-btn">بازگشت به خانه</a>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <!-- Decorative Background Elements -->
+        <div class="blur-circle circle-1"></div>
+        <div class="blur-circle circle-2"></div>
+
+        <!-- Register Card -->
+        <div class="auth-card">
+            <div class="auth-top">
+                <div class="icon-circle">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                </div>
+
+                <h1>خوش آمدید</h1>
+
+                <p class="text-muted">
+                    شماره موبایل خود را وارد کنید تا کد تأیید برای شما ارسال شود.
+                </p>
+            </div>
+
+            <!-- Error State Banner -->
+            <div class="error-banner" id="error-banner" style="display: none;">
+                <p>
+                    ارسال کد تأیید امکان‌پذیر نیست. لطفاً دوباره تلاش کنید.
+                </p>
+
+                <button class="btn-text" onclick="retrySend()">
+                    تلاش مجدد
+                </button>
+            </div>
+
+            <form id="register-form" class="auth-form">
+
+                <label for="mobile">
+                    شماره موبایل
+                </label>
+
+                <div class="input-container">
+                    <span class="input-icon">📱</span>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="09XX XXX XXXX"
+                        maxlength="11"
+                        pattern="[0-9]{11}"
+                        inputmode="numeric"
+                        required>
+                </div>
+
+                <p id="validation-msg" class="error-text" style="display: none;">
+                    لطفاً یک شماره موبایل معتبر وارد کنید.
+                </p>
+
+
+                <button onclick="window.location='verify.html'" type="submit" id="submit-btn" class="btn btn-primary w-100" disabled>
+
+                    <!-- <span class="btn-text"> -->
+                        ارسال کد تأیید
+                    <!-- </span> -->
+
+                    <div class="spinner" style="display: none;"></div>
+
+                </button>
+
+            </form>
+
+
+            <!-- <div class="divider"><span>یا</span></div> -->
+
+
+            <!-- <div class="auth-bottom text-center">
+
+                <p class="text-sm">
+                    کد تأیید را دریافت کرده‌اید؟
+                    <a href="verify.html" class="text-primary">
+                        اکنون تأیید کنید
+                    </a>
+                </p>
+
+            </div> -->
+
+        </div>
+
+    </main>
+
+    <script src="assets/js/register.js"></script>
+
+</body>
+</html>

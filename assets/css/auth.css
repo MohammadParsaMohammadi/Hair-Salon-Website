@@ -1,0 +1,583 @@
+/* Minimal Auth Page Foundation */
+.auth-page {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    overflow: hidden;
+    min-height: 100vh;
+}
+.auth-header { height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+.auth-main { min-height: 85vh; display: flex; align-items: center; justify-content: center; position: relative; }
+
+/* Decorative Background */
+.blur-circle { position: absolute; filter: blur(80px); border-radius: 50%; z-index: 0; animation: float 6s infinite ease-in-out; }
+.circle-1 { top: 10%; right: 10%; width: 300px; height: 300px; background: var(--primary-color); opacity: 0.1; }
+.circle-2 { bottom: 10%; left: 10%; width: 250px; height: 250px; background: var(--secondary-color); opacity: 0.08; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+/* Register Card */
+.auth-card {
+    background: white; width: 460px; padding: 48px; border-radius: 24px;
+    border: 1px solid #E5E7EB; box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    z-index: 1; transition: border 300ms ease; animation: fadeUp 500ms ease-out;
+}
+.auth-card:hover { border-color: var(--primary-color); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* Form Elements */
+.icon-circle { width: 72px; height: 72px; background: rgba(122, 158, 126, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: var(--primary-color); }
+.auth-top h1 { font-size: 34px; font-weight: 700; margin-bottom: 12px; }
+.auth-form { margin-top: 36px; }
+.input-container { height: 58px; border: 1px solid #D1D5DB; border-radius: 16px; display: flex; align-items: center; padding: 0 18px; margin-top: 8px; transition: border 200ms ease; }
+.input-container:focus-within { border-color: var(--primary-color); box-shadow: 0 0 0 1px var(--primary-color); }
+.input-container input { border: none; outline: none; width: 100%; font-size: 16px; padding-left: 12px; letter-spacing: 0.5px; }
+#mobile:focus { border-width: 0px; outline: none; box-shadow: none; }
+
+/* States */
+.input-invalid { border-color: #EF4444 !important; animation: shake 0.3s; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.divider { text-align: center; margin: 32px 0; color: #D1D5DB; font-size: 14px; }
+
+
+/* ==========================================================================
+   Shared Authentication & Verification Page Layout
+   ========================================================================== */
+
+.auth-page {
+    background: linear-gradient(135deg, var(--bg-color) 0%, rgba(122, 158, 126, 0.04) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Minimal Header */
+.auth-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+}
+[data-theme="dark"] .auth-header {
+    background: rgba(18, 18, 18, 0.75);
+}
+.auth-header-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header interactions */
+.auth-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: transform 250ms ease-in-out;
+}
+.auth-header .logo:hover {
+    transform: scale(1.05);
+}
+.nav-text-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    position: relative;
+    padding: 4px 0;
+}
+.nav-text-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 250ms ease-in-out;
+}
+.nav-text-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Main Auth Section wrapper */
+.auth-main {
+    flex-grow: 1;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* Decorative Background */
+.blur-circle {
+    position: absolute;
+    filter: blur(100px);
+    border-radius: 50%;
+    z-index: 0;
+    animation: floatBackground 6s infinite ease-in-out;
+    pointer-events: none;
+}
+.circle-top-right {
+    top: 10%;
+    right: 15%;
+    width: 320px;
+    height: 320px;
+    background-color: var(--primary-color);
+    opacity: 0.10;
+}
+.circle-bottom-left {
+    bottom: 10%;
+    left: 15%;
+    width: 350px;
+    height: 350px;
+    background-color: var(--secondary-color);
+    opacity: 0.08;
+    animation-delay: -3s; /* Offset float timing */
+}
+
+@keyframes floatBackground {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ==========================================================================
+   Verification Card Setup
+   ========================================================================== */
+.auth-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    width: 460px;
+    padding: 48px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+    z-index: 10;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
+    animation: entranceCard 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.auth-card:hover {
+    border-color: rgba(122, 158, 126, 0.35); /* Subtle Primary background */
+}
+[data-theme="dark"] .auth-card:hover {
+    border-color: rgba(212, 175, 55, 0.25);
+}
+
+@keyframes entranceCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header Text elements inside card */
+.auth-top {
+    text-align: center;
+}
+.icon-circle {
+    width: 72px;
+    height: 72px;
+    background: rgba(122, 158, 126, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px auto;
+    color: var(--primary-color);
+    animation: fadeScaleIn 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-theme="dark"] .icon-circle {
+    background: rgba(212, 175, 55, 0.08);
+}
+@keyframes fadeScaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.auth-top h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+}
+.auth-top p {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Interactive phone verification link styling */
+.phone-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: color 200ms ease-in-out;
+}
+.phone-link:hover {
+    color: var(--primary-hover);
+}
+
+/* OTP Container & Input Elements */
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    direction: ltr; /* Ensure inputs maintain LTR orientation */
+}
+.otp-input {
+    width: 64px;
+    height: 68px;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    transition: all 180ms ease-in-out;
+    outline: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+}
+.otp-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(122, 158, 126, 0.15);
+    transform: scale(1.03);
+}
+[data-theme="dark"] .otp-input:focus {
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+}
+
+/* Error State Shake Animation */
+.otp-container.shake {
+    animation: shakeEffect 350ms ease-in-out;
+}
+.otp-input.error-border {
+    border-color: #EF4444 !important;
+}
+@keyframes shakeEffect {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+/* Countdown & resend segment */
+.countdown-section {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+.countdown-section p {
+    color: var(--text-color);
+    opacity: 0.6;
+    margin-bottom: 4px;
+}
+.resend-btn {
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: all 180ms ease-in-out;
+    text-decoration: none;
+}
+.resend-btn span {
+    font-weight: 700;
+}
+.resend-btn:disabled {
+    cursor: default;
+    color: var(--primary-color);
+    opacity: 0.85;
+}
+.resend-btn.active-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.resend-btn.active-link:hover {
+    color: var(--primary-hover);
+}
+
+/* Verify Actions Button Setup */
+.auth-form .btn-primary {
+    margin-top: 34px;
+    height: 56px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 200ms ease-in-out;
+    
+}
+
+.auth-form .btn-primary:not(:disabled):hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+.auth-form .btn-primary:disabled {
+    opacity: 0.60;
+    cursor: not-allowed;
+}
+
+/* Bottom Action Change Number Link */
+.bottom-action {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+.action-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 4px;
+    transition: color 200ms ease-in-out;
+}
+.action-link:hover {
+    color: var(--primary-hover);
+}
+
+/* Error Banner styling */
+.error-banner {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 28px;
+    color: #EF4444;
+    font-size: 14px;
+    font-weight: 500;
+    animation: fadeIn 300ms ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Success Overlay */
+.success-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--surface-color);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease-in-out;
+}
+.success-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.success-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(74, 163, 110, 0.1);
+    color: #4AA36E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transform: scale(0.6);
+    transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.success-overlay.active .success-icon-wrapper {
+    transform: scale(1);
+}
+.success-icon-wrapper svg {
+    width: 36px;
+    height: 36px;
+}
+.success-overlay h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+.success-overlay p {
+    font-size: 15px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   Responsive Overrides
+   ========================================================================== */
+@media (max-width: 991px) {
+    /* Tablet */
+    .auth-card {
+        width: 420px;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Mobile */
+    .auth-header-container {
+        padding: 0 20px;
+    }
+    .auth-card {
+        width: 92%;
+        padding: 32px 24px;
+    }
+    .otp-container {
+        gap: 12px;
+    }
+    .otp-input {
+        width: 58px;
+        height: 62px;
+        font-size: 24px;
+    }
+}
+
+
+/* Header */
+.auth-header{
+    height: 64px;
+}
+
+.auth-header .logo{
+    font-size:18px;
+}
+
+.nav-text-link{
+    font-size:14px;
+}
+
+/* Card */
+.auth-card{
+    width:420px;          /* قبلا 460 */
+    padding:40px;         /* قبلا 48 */
+    border-radius:20px;
+}
+
+/* Top Icon */
+.icon-circle{
+    width:62px;
+    height:62px;
+    margin-bottom:20px;
+}
+
+.icon-circle svg{
+    width:28px;
+    height:28px;
+}
+
+/* Title */
+.auth-top h1{
+    font-size:28px;       /* قبلا 34 */
+    margin-bottom:10px;
+}
+
+.auth-top p{
+    font-size:14px;
+}
+
+/* OTP */
+.otp-container{
+    gap:12px;
+    margin-top:32px;
+}
+
+.otp-input{
+    width:56px;           /* قبلا 64 */
+    height:60px;          /* قبلا 68 */
+    font-size:24px;       /* قبلا 28 */
+    border-radius:14px;
+}
+
+/* Countdown */
+.countdown-section{
+    margin-top:16px;
+}
+
+.countdown-section p,
+.resend-btn{
+    font-size:13px;
+}
+
+/* Verify Button */
+.auth-form .btn-primary{
+    margin-top:28px;
+    height:50px;          /* قبلا 56 */
+    font-size:15px;
+    border-radius:14px;
+}
+
+/* Bottom */
+.bottom-action{
+    margin-top:20px;
+    font-size:13px;
+}
+
+/* Error */
+.error-banner{
+    padding:10px 14px;
+    margin-top:22px;
+    font-size:13px;
+}
+
+/* Success */
+.success-icon-wrapper{
+    width:68px;
+    height:68px;
+}
+
+.success-icon-wrapper svg{
+    width:30px;
+    height:30px;
+}
+
+.success-overlay h2{
+    font-size:24px;
+}
+
+.success-overlay p{
+    font-size:14px;
+}
+
+
