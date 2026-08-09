@@ -284,6 +284,7 @@ body.crm-body {
    ========================================================================== */
 .table-actions {
     display: flex;
+   flex-wrap: wrap; 
     gap: 16px;
 }
 .search-input-wrapper {
