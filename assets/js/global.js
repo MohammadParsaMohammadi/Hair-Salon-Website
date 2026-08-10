@@ -76,35 +76,97 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==============================================
-       5. Testimonial Auto-Slider
-       ============================================== */
-    const track = document.getElementById('testimonial-track');
-    if (track) {
-        let currentIndex = 0;
-        const cards = track.children;
-        
-        setInterval(() => {
-            // Determine how many cards are visible based on width to slide correctly
-            const isMobile = window.innerWidth <= 767;
-            const isTablet = window.innerWidth > 767 && window.innerWidth <= 991;
-            const cardsVisible = isMobile ? 1 : (isTablet ? 2 : 3);
-            
-            const maxIndex = cards.length - cardsVisible;
-            
-            if (currentIndex >= maxIndex) {
-                currentIndex = 0;
-            } else {
-                currentIndex++;
-            }
+   5. Testimonial Auto-Slider (RTL-aware)
+   ============================================== */
+const track = document.getElementById('testimonial-track');
+const dotsContainer = document.getElementById('slider-dots');
 
-            // Gap is 32px. Calculation: card width + gap
-            const gap = 32;
-            const cardWidth = cards[0].offsetWidth;
-            const moveAmount = (cardWidth + gap) * currentIndex;
-            
-            track.style.transform = `translateX(-${moveAmount}px)`;
-        }, 6000); // 6 seconds as requested
+if (track) {
+    let currentIndex = 0;
+    const cards = track.children;
+    let autoSlideInterval = null;
+
+    function getCardsVisible() {
+        if (window.innerWidth <= 767) return 1;
+        if (window.innerWidth <= 991) return 2;
+        return 3;
     }
+
+    function updateSlider() {
+        const cardsVisible = getCardsVisible();
+        const maxIndex = Math.max(0, cards.length - cardsVisible);
+        
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        const gap = 32;
+        const cardWidth = cards[0].offsetWidth;
+        const moveAmount = (cardWidth + gap) * currentIndex;
+        
+        // Use positive translateX when page is in RTL mode
+        const isRTL = document.dir === 'rtl' || getComputedStyle(document.body).direction === 'rtl';
+        const directionMultiplier = isRTL ? 1 : -1;
+
+        track.style.transform = `translateX(${directionMultiplier * moveAmount}px)`;
+
+        // Sync pagination dots
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+    }
+
+    function createDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        const cardsVisible = getCardsVisible();
+        const totalDots = Math.max(1, cards.length - cardsVisible + 1);
+
+        for (let i = 0; i < totalDots; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSlider();
+                resetInterval();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() {
+        const cardsVisible = getCardsVisible();
+        const maxIndex = cards.length - cardsVisible;
+
+        if (currentIndex >= maxIndex) {
+            currentIndex = 0;
+        } else {
+            currentIndex++;
+        }
+        updateSlider();
+    }
+
+    function resetInterval() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, 6000);
+    }
+
+    // Initialize slider & controls
+    createDots();
+    updateSlider();
+    autoSlideInterval = setInterval(nextSlide, 6000);
+
+    // Recalculate layout on window resize
+    window.addEventListener('resize', () => {
+        createDots();
+        updateSlider();
+    });
+}
 
     /* ==============================================
        6. Simulate Skeleton Loading (UX Spec)
