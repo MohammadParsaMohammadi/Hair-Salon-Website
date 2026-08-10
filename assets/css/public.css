@@ -81,7 +81,7 @@ body {
 .drawer-overlay.active { opacity: 1; pointer-events: auto; }
 
 .mobile-drawer {
-    position: fixed; top: 0; right: 0; width: 300px; height: 100vh;
+    position: fixed; top: 0; right: 0; width: 300px; height: 100%;
     background-color: var(--surface-color); z-index: 1002;
     padding: 24px; display: flex; flex-direction: column;
     box-shadow: var(--shadow-lg); 
