@@ -1,79 +1,124 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==============================================
-       1. Custom Dropdown & Conditional Logic
+       1. Custom Dropdowns & Conditional Logic
        ============================================== */
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
-    const dropdownMenu = document.querySelector('.custom-dropdown');
-    const dropdownOptions = document.querySelectorAll('.dropdown-options li');
+    
+    // Service Dropdown Elements (Updated to be ID-specific)
+    const serviceDropdownTrigger = document.querySelector('#service-dropdown .dropdown-trigger');
+    const serviceDropdownMenu = document.getElementById('service-dropdown');
+    const serviceDropdownOptions = document.querySelectorAll('#service-options li');
     const searchInput = document.getElementById('service-search');
-    const selectedText = document.querySelector('.selected-text');
+    const serviceSelectedText = document.querySelector('#service-dropdown .selected-text');
     
     const otherServiceContainer = document.getElementById('other-service-container');
     const otherDescriptionInput = document.getElementById('other-description');
 
-    // Toggle Dropdown
-    dropdownTrigger.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('open');
-        dropdownTrigger.classList.toggle('active');
-        if (dropdownMenu.classList.contains('open')) {
+    // Time Dropdown Elements (New)
+    const timeDropdownTrigger = document.querySelector('#time-dropdown .dropdown-trigger');
+    const timeDropdownMenu = document.getElementById('time-dropdown');
+    const timeDropdownOptions = document.querySelectorAll('#time-options li');
+    const timeSelectedText = document.getElementById('time-selected-text');
+    
+    let currentTime = null;
+
+    // Helper: Close all dropdowns
+    function closeAllDropdowns() {
+        serviceDropdownMenu.classList.remove('open');
+        serviceDropdownTrigger.classList.remove('active');
+        timeDropdownMenu.classList.remove('open');
+        timeDropdownTrigger.classList.remove('active');
+    }
+
+    // Toggle Service Dropdown
+    serviceDropdownTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = serviceDropdownMenu.classList.contains('open');
+        closeAllDropdowns();
+        if (!isOpen) {
+            serviceDropdownMenu.classList.add('open');
+            serviceDropdownTrigger.classList.add('active');
             searchInput.focus();
+        }
+    });
+
+    // Toggle Time Dropdown
+    timeDropdownTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = timeDropdownMenu.classList.contains('open');
+        closeAllDropdowns();
+        if (!isOpen) {
+            timeDropdownMenu.classList.add('open');
+            timeDropdownTrigger.classList.add('active');
         }
     });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.custom-dropdown')) {
-            dropdownMenu.classList.remove('open');
-            dropdownTrigger.classList.remove('active');
+            closeAllDropdowns();
         }
     });
 
-    // Search Filtering
+    // Service Search Filtering
     searchInput.addEventListener('input', (e) => {
         const filter = e.target.value.toLowerCase();
-        dropdownOptions.forEach(option => {
+        serviceDropdownOptions.forEach(option => {
             const text = option.querySelector('.opt-name').textContent.toLowerCase();
             option.style.display = text.includes(filter) ? 'flex' : 'none';
         });
     });
 
-    // Option Selection Logic
-    dropdownOptions.forEach(option => {
+    // Service Option Selection Logic
+    serviceDropdownOptions.forEach(option => {
         option.addEventListener('click', () => {
-            // Reset styles
-            dropdownOptions.forEach(opt => opt.classList.remove('selected'));
-            dropdownTrigger.classList.remove('error');
+            serviceDropdownOptions.forEach(opt => opt.classList.remove('selected'));
+            serviceDropdownTrigger.classList.remove('error');
             
-            // Set active
             option.classList.add('selected');
             const val = parseFloat(option.getAttribute('data-value'));
             const name = option.getAttribute('data-name');
             
-            selectedText.textContent = name;
-            selectedText.classList.add('has-value');
+            serviceSelectedText.textContent = name;
+            serviceSelectedText.classList.add('has-value');
             
-            // Handle "Other" field condition
             if (name === 'Other' || name === 'سایر') {
                 otherServiceContainer.classList.add('show');
             } else {
                 otherServiceContainer.classList.remove('show');
-                otherDescriptionInput.value = ''; // Reset
+                otherDescriptionInput.value = '';
                 otherDescriptionInput.classList.remove('error');
             }
 
-            // Close dropdown
-            dropdownMenu.classList.remove('open');
-            dropdownTrigger.classList.remove('active');
-
-            // Trigger Live Update
+            closeAllDropdowns();
             updateOrderSummary(name, val);
+        });
+    });
+
+    // Time Option Selection Logic (New)
+    timeDropdownOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            timeDropdownOptions.forEach(opt => opt.classList.remove('selected'));
+            timeDropdownTrigger.classList.remove('error');
+            
+            option.classList.add('selected');
+            const timeVal = option.getAttribute('data-time');
+            
+            timeSelectedText.textContent = timeVal;
+            timeSelectedText.classList.add('has-value');
+            
+            closeAllDropdowns();
+
+            // Update State & Summary
+            currentTime = timeVal;
+            document.getElementById('sum-time').textContent = timeVal;
+            checkFormValidity();
         });
     });
 
 
     /* ==============================================
-       2. Live Order Summary & Count Animation
+       2. Live Order Summary & Validation State
        ============================================== */
     let currentPrice = 0;
     let currentDiscount = 0;
@@ -86,116 +131,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const sumFinal = document.getElementById('sum-final');
     const submitBtn = document.getElementById('submit-btn');
 
-    function animateValue(obj, start, end, duration, prefix = "$") {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            // Calculate current value ensuring proper rounding
-            const currentVal = Math.floor(progress * (end - start) + start);
-            obj.textContent = prefix + currentVal;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                obj.textContent = prefix + end; // Ensure it ends exactly on the target
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
-
-    function updateOrderSummary(name, price) {
-        // Toggle view states
-        summaryEmpty.style.display = 'none';
-        summaryContent.style.display = 'block';
-
-        sumServiceName.textContent = name;
-        
-        // Count animation for base price (0.4s rule)
-        animateValue(sumPrice, currentPrice, price, 400);
-        
-        // Calculate Final
-        let finalAmount = price - currentDiscount;
-        if (finalAmount < 0) finalAmount = 0;
-        
-        // Count animation for final price
-        const previousFinal = currentPrice - currentDiscount > 0 ? currentPrice - currentDiscount : 0;
-        animateValue(sumFinal, previousFinal, finalAmount, 400);
-        
-        currentPrice = price;
-
-        // Button validation rule
-        if (price > 0) {
+    // Centralized form validity check
+    function checkFormValidity() {
+        if (currentPrice > 0 && currentTime !== null) {
             submitBtn.disabled = false;
         } else {
             submitBtn.disabled = true;
         }
     }
 
-
-    /* ==============================================
-       3. Textarea Character Counter
-       ============================================== */
-    const notesInput = document.getElementById('additional-notes');
-    const charCounter = document.getElementById('char-counter');
-
-    notesInput.addEventListener('input', function() {
-        const length = this.value.length;
-        charCounter.textContent = `${length} / 1000`;
-    });
-
-
-    /* ==============================================
-       4. Discount Code Logic
-       ============================================== */
-    const couponInput = document.getElementById('coupon-input');
-    const applyCouponBtn = document.getElementById('apply-coupon-btn');
-    const couponMessage = document.getElementById('coupon-message');
-
-    applyCouponBtn.addEventListener('click', () => {
-        const code = couponInput.value.trim().toUpperCase();
-        if (code === '') return;
-
-        // Clear previous states
-        couponInput.classList.remove('success', 'invalid');
-        couponMessage.classList.remove('success', 'invalid');
-
-        // Simulation mock for discount validation
-        if (code === 'LUMIERE10') {
-            couponInput.classList.add('success');
-            couponMessage.textContent = 'کد تخفیف با موفقیت اعمال شد.';
-            couponMessage.classList.add('success');
+    function animateValue(obj, start, end, duration, prefix = "$") {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const currentVal = Math.floor(progress * (end - start) + start);
+            obj.textContent = prefix + currentVal;
             
-            currentDiscount = 10;
-            sumDiscount.textContent = '-$10';
-            
-            // Re-run summary update to adjust final amount
-            if (currentPrice > 0) {
-                const finalAmount = Math.max(currentPrice - currentDiscount, 0);
-                animateValue(sumFinal, currentPrice, finalAmount, 400);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                obj.textContent = prefix + end; 
             }
-        } else {
-            couponInput.classList.add('invalid');
-            couponMessage.textContent = 'کد تخفیف نامعتبر است.';
-            couponMessage.classList.add('invalid');
-            
-            // Reset discount
-            currentDiscount = 0;
-            sumDiscount.textContent = '-$0';
-            if (currentPrice > 0) {
-                animateValue(sumFinal, currentPrice - 10 /* mock old val */, currentPrice, 400);
-            }
-        }
-    });
+        };
+        window.requestAnimationFrame(step);
+    }
 
+    function updateOrderSummary(name, price) {
+        summaryEmpty.style.display = 'none';
+        summaryContent.style.display = 'block';
+
+        sumServiceName.textContent = name;
+        
+        animateValue(sumPrice, currentPrice, price, 400);
+        
+        let finalAmount = price - currentDiscount;
+        if (finalAmount < 0) finalAmount = 0;
+        
+        const previousFinal = currentPrice - currentDiscount > 0 ? currentPrice - currentDiscount : 0;
+        animateValue(sumFinal, previousFinal, finalAmount, 400);
+        
+        currentPrice = price;
+        checkFormValidity();
+    }
+
+    /* 
+       Keep Sections 3 (Textarea) and 4 (Discount) exactly as they are in your file 
+    */
 
     /* ==============================================
        5. Form Submission & Validation States
        ============================================== */
     const reservationForm = document.getElementById('reservation-form');
     const errorBanner = document.getElementById('global-error-banner');
-    const btnText = submitBtn.querySelector('.btn-text');
+    const btnText = submitBtn.querySelector('.btn-text') || submitBtn; // Fallback added due to HTML variation
     const spinner = document.getElementById('submit-spinner');
     const successModal = document.getElementById('success-modal');
 
@@ -205,13 +194,19 @@ document.addEventListener('DOMContentLoaded', () => {
         errorBanner.style.display = 'none';
 
         // Validation Rule 1: No service selected
-        if (currentPrice === 0 && (selectedText.textContent === 'Select a service' || selectedText.textContent === 'انتخاب سرویس')) {
-            dropdownTrigger.classList.add('error');
+        if (currentPrice === 0) {
+            serviceDropdownTrigger.classList.add('error');
             isValid = false;
         }
 
-        // Validation Rule 2: "Other" selected but description empty
-        if (selectedText.textContent === 'Other' || selectedText.textContent === 'سایر') {
+        // Validation Rule 2: No time selected (New)
+        if (!currentTime) {
+            timeDropdownTrigger.classList.add('error');
+            isValid = false;
+        }
+
+        // Validation Rule 3: "Other" selected but description empty
+        if (serviceSelectedText.textContent === 'Other' || serviceSelectedText.textContent === 'سایر') {
             if (otherDescriptionInput.value.trim() === '') {
                 otherDescriptionInput.classList.add('error');
                 isValid = false;
@@ -228,23 +223,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Trigger Loading State
         submitBtn.disabled = true;
         spinner.style.display = 'block';
-        btnText.textContent = 'در حال پردازش...';
+        if(submitBtn.querySelector('.btn-text')) {
+             submitBtn.querySelector('.btn-text').textContent = 'در حال پردازش...';
+        } else {
+             // To handle the HTML commented text variance
+             submitBtn.childNodes[0].textContent = 'در حال پردازش... '; 
+        }
 
-        // Skeleton loading class on summary to simulate processing
         summaryContent.classList.add('summary-loading');
 
-        // Simulate Gateway Redirect & Success Return delay
         setTimeout(() => {
             summaryContent.classList.remove('summary-loading');
             spinner.style.display = 'none';
-            btnText.textContent = 'ادامه جهت پرداخت';
+            if(submitBtn.querySelector('.btn-text')) {
+                submitBtn.querySelector('.btn-text').textContent = 'ادامه جهت پرداخت';
+            } else {
+                submitBtn.childNodes[0].textContent = 'ادامه جهت پرداخت '; 
+            }
             
-            // Show Success Modal
             successModal.classList.add('active');
+            
+            // Outputting the final data exactly as requested conceptually
+            console.log("Final Reservation State:", {
+                service: serviceSelectedText.textContent,
+                price: currentPrice,
+                time: currentTime,
+                discount: currentDiscount,
+                notes: document.getElementById('additional-notes').value
+            });
+            
         }, 2000);
     });
 
-    // Clear description error on typing
     otherDescriptionInput.addEventListener('input', function() {
         if (this.value.trim() !== '') {
             this.classList.remove('error');
